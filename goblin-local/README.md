@@ -16,10 +16,14 @@ The app starts a local server at <http://127.0.0.1:8765> and a small "Goblin is 
 ## What it does
 
 - Shows York-specific CSV definitions first, matching case-insensitively while ignoring punctuation and spacing.
-- Falls back to NLTK WordNet dictionary definitions and synonyms. If selected text contains multiple unrecognized words, Goblin shows up to two definitions for each word.
+- Falls back to definitions and synonyms saved in `data/general_dictionary.csv`, then uses NLTK WordNet for missing terms and saves successful WordNet lookups back to that local CSV. If selected text contains multiple unrecognized words, Goblin shows up to two definitions for each word.
 - Lets anyone submit a York definition with no authentication for this prototype.
 - Appends submitted definitions immediately to `data/goblin_york_terms_seed.csv`.
 - Saves definition requests to `data/definition_requests.csv`.
+
+## Local dictionary CSV
+
+Goblin stores general dictionary rows in `data/general_dictionary.csv` with the columns `term`, `part_of_speech`, `definition`, `examples`, and `synonyms`. Separate multiple examples or synonyms with `|`. You can edit this CSV directly, and successful WordNet lookups are cached there automatically for future offline use.
 
 ## Useful URLs
 
