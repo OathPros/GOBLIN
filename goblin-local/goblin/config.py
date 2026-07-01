@@ -15,3 +15,6 @@ YORK_FIELDS = [
     "primary_action_url", "related_terms",
 ]
 REQUEST_FIELDS = ["term", "suggested_context", "note"]
+
+DESKTOP_CONFIG_PATH = DATA_DIR / "desktop_config.json"
+DEFAULT_HOTKEY = "ctrl+shift+y"

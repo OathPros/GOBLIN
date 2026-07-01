@@ -11,12 +11,12 @@ pip install -r requirements.txt
 python run_goblin.py
 ```
 
-The app starts a local server at <http://127.0.0.1:8765> and a small "Goblin is running" control window. Highlight text anywhere and press `Ctrl+Shift+Y` or `Ctrl+Alt+Y` to open a popup.
+The app starts a local server at <http://127.0.0.1:8765> and a small "Goblin is running" control window. Highlight text anywhere and press the configured shortcut (default: `Ctrl+Shift+Y`) to open a popup. Use **Set shortcut** in the control window to choose a custom hotkey.
 
 ## What it does
 
-- Shows York-specific CSV definitions first.
-- Falls back to NLTK WordNet dictionary definitions and synonyms.
+- Shows York-specific CSV definitions first, matching case-insensitively while ignoring punctuation and spacing.
+- Falls back to NLTK WordNet dictionary definitions and synonyms. If selected text contains multiple unrecognized words, Goblin shows up to two definitions for each word.
 - Lets anyone submit a York definition with no authentication for this prototype.
 - Appends submitted definitions immediately to `data/goblin_york_terms_seed.csv`.
 - Saves definition requests to `data/definition_requests.csv`.
@@ -34,4 +34,4 @@ The app starts a local server at <http://127.0.0.1:8765> and a small "Goblin is 
 - If selected text capture fails, copy text manually and press the shortcut.
 - If WordNet download fails, run Python and execute `import nltk; nltk.download("wordnet"); nltk.download("omw-1.4")`.
 - Some apps may block simulated `Ctrl+C`; use manual copy fallback.
-- `Ctrl+Shift+Y` may conflict with some apps; use `Ctrl+Alt+Y` fallback.
+- If the default `Ctrl+Shift+Y` shortcut conflicts with another app, click **Set shortcut** and enter another `keyboard` hotkey string such as `ctrl+alt+g`.
