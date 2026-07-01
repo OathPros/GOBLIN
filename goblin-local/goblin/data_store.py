@@ -38,7 +38,12 @@ def normalize_text(value: str) -> str:
     return re.sub(r"\s+", " ", (value or "").strip())
 
 def normalize_key(value: str) -> str:
-    return normalize_text(value).casefold()
+    """Return a lookup key that ignores case, punctuation, and spacing."""
+    return re.sub(r"[^\w]+", "", normalize_text(value), flags=re.UNICODE).casefold()
+
+def tokenize_lookup_words(value: str) -> list[str]:
+    """Split lookup text into searchable words while ignoring punctuation."""
+    return re.findall(r"\w+", (value or "").casefold(), flags=re.UNICODE)
 
 def split_related(value: str) -> list[str]:
     return [part.strip() for part in re.split(r"[;,]", value or "") if part.strip()]
