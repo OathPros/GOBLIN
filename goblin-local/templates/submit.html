@@ -1,1 +1,61 @@
-{% extends "base.html" %}{% block content %}<section class="card"><h2>Submit York definition</h2>{% for error in errors %}<p class="error">{{ error }}</p>{% endfor %}<form method="post">{% for field in ['term','full_form','plain_definition','context','category','source_label','source_url','primary_action_label','primary_action_url','related_terms'] %}<label>{{ field.replace('_',' ') }}<textarea name="{{ field }}" {% if field != 'plain_definition' %}rows="1"{% endif %}>{{ values[field] }}</textarea></label>{% endfor %}<button>Save definition</button></form></section>{% endblock %}
+{% extends "base.html" %}
+{% block content %}
+<section class="card submit-card">
+  <div class="form-header">
+    <p class="eyebrow">Community glossary</p>
+    <h2>Submit a York definition</h2>
+    <p class="lede">Add the acronym, full term, and a plain-language definition. Everything else is optional.</p>
+  </div>
+
+  {% if errors %}
+    <div class="error-list" role="alert" aria-labelledby="submit-errors">
+      <h3 id="submit-errors">Please check your submission</h3>
+      {% for error in errors %}<p class="error">{{ error }}</p>{% endfor %}
+    </div>
+  {% endif %}
+
+  <form method="post" class="definition-form">
+    <label for="term">Acronym or short form <span class="required">Required</span></label>
+    <input id="term" name="term" value="{{ values.term }}" autocomplete="off" required placeholder="For example, EX">
+
+    <label for="full_form">Full term</label>
+    <input id="full_form" name="full_form" value="{{ values.full_form }}" autocomplete="off" placeholder="For example, Example">
+
+    <label for="plain_definition">Definition <span class="required">Required</span></label>
+    <textarea id="plain_definition" name="plain_definition" rows="4" required placeholder="Explain what this means in plain language.">{{ values.plain_definition }}</textarea>
+
+    <fieldset class="optional-group">
+      <legend>Source details</legend>
+      <p class="field-help">Add a description and link if there is a useful source people should use.</p>
+
+      <label for="source_label">Url description</label>
+      <input id="source_label" name="source_label" value="{{ values.source_label }}" autocomplete="off" placeholder="For example, this url takes you to York's Enterprise GitHub">
+
+      <label for="source_url">Url</label>
+      <input id="source_url" name="source_url" value="{{ values.source_url }}" inputmode="url" autocomplete="url" placeholder="For example, https://github.com/enterprises/YorkUCA/sso">
+    </fieldset>
+
+    <details class="optional-details">
+      <summary>Show optional fields</summary>
+      <div class="optional-details-grid">
+        <label for="context">Context</label>
+        <input id="context" name="context" value="{{ values.context }}" autocomplete="off" placeholder="For example, UIT or student records">
+
+        <label for="category">Category</label>
+        <input id="category" name="category" value="{{ values.category }}" autocomplete="off" placeholder="For example, IT services">
+
+        <label for="primary_action_label">Primary action label</label>
+        <input id="primary_action_label" name="primary_action_label" value="{{ values.primary_action_label }}" autocomplete="off" placeholder="For example, Open the service">
+
+        <label for="primary_action_url">Primary action url</label>
+        <input id="primary_action_url" name="primary_action_url" value="{{ values.primary_action_url }}" inputmode="url" autocomplete="url">
+
+        <label for="related_terms">Related terms</label>
+        <input id="related_terms" name="related_terms" value="{{ values.related_terms }}" autocomplete="off" placeholder="Separate terms with commas">
+      </div>
+    </details>
+
+    <button type="submit">Submit definition</button>
+  </form>
+</section>
+{% endblock %}
