@@ -1,0 +1,6 @@
+flask
+requests
+nltk
+keyboard
+pyautogui
+pyperclip
