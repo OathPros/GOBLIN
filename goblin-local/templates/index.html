@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block content %}<section class="card"><form action="/lookup"><label>Search a term, acronym, or phrase</label><div class="row"><input name="q" value="{{ q }}" autofocus><button>Look up</button></div></form></section>{% if result %}{% include "entry.html" %}{% endif %}{% endblock %}
